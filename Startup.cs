@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using aspnet_exam_movie.Models.Repositories;
 
-namespace aspnet_exam_movie
+namespace hastowork
 {
     public class Startup
     {
@@ -29,6 +30,7 @@ namespace aspnet_exam_movie
         {
             // Add framework services.
             services.AddMvc();
+            services.AddScoped<IMovieRepository, MovieRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +39,8 @@ namespace aspnet_exam_movie
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseMvc();
+            //app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

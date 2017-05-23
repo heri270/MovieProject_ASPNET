@@ -3,24 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using aspnet_exam_movie.Models.Repositories;
+using aspnet_exam_movie.Models.Entities;
 
 namespace aspnet_exam_movie.Controllers
 {
     [Route("api/[controller]")]
-    public class MovieController : Controller
+    public class MoviesController : Controller
     {
-        // GET api/values
+        private IMovieRepository _movieRepository;
+        public MoviesController(IMovieRepository movieRepository){
+            _movieRepository = movieRepository;
+            
+        }
+        
+     //   List<TodoItem> _todoList = new List<TodoItem>();
+         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var movies = _movieRepository.GetAll();
+          //  _todoList.Add(new TodoItem{TodoItemID = 1, Task = "First Task", IsComplete = false});
+            return new OkObjectResult(movies);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            //return NotFound();
+            return new OkObjectResult(_movieRepository.Get(id));
         }
 
         // POST api/values
@@ -37,8 +49,11 @@ namespace aspnet_exam_movie.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            _movieRepository.Delete(id);
+            return NoContent();
+            
         }
     }
 }
