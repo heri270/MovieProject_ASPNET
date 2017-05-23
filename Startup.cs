@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using aspnet_exam_movie.Models.Repositories;
 
-namespace hastowork
+namespace aspnet_exam_movie
 {
     public class Startup
     {
