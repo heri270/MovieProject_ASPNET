@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 
-namespace aspnet_exam_movie
+namespace hastowork
 {
     public class Program
     {
@@ -24,6 +24,7 @@ namespace aspnet_exam_movie
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseUrls("http://localhost:5000")
                 .Build();
 
             host.Run();
